@@ -10,10 +10,10 @@
 </head>
 <body>
     <h1>Roll the dice</h1>
-    <table id="table" class="container">
+    <table id="table" class="container table">
         <tr>
             <th colspan="2">
-                Score Board
+                <span class="special">Score Board :</span>
             </th>
         </tr>
         <tr>
@@ -25,10 +25,9 @@
             <td id="p2">0</td>
         </tr>
     </table>
-    <div class=".container scene">
-       <h2>Arena</h2>
-       <h4 id="turn"></h4>
-        <p id="score">Score:</p> 
+    <span class=".container scene">
+       <span id="turn"></span>
+        <span id="score">Score:</span> 
         <div class="cube">
             <div class="cube__face cube__face--1">1</div>
             <div class="cube__face cube__face--2">2</div>
@@ -37,9 +36,9 @@
             <div class="cube__face cube__face--5">5</div>
             <div class="cube__face cube__face--6">6</div>
         </div>
-    <button id="roll" class="btn btn-primary">Roll the dice <span id="short">(space bar)</span></button>
+    <button id="roll" class="btn btn-primary">Roll the dice <span id="short">(Space bar)</span></button>
     <button id="hold" class="btn btn-success">Hold <span id="short">(Enter key)</span></button>
-    </div>
+    </span>
     <button id="restart" class="btn btn-danger">Restart the Game</button>
     <button type="submit" class="btn btn-info" onclick="openpopup()">Rules</button>
     <div class="popup">
