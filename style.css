@@ -1,122 +1,123 @@
-var p1=document.querySelector("#p1");
-var p2=document.querySelector("#p2");
-var dice=document.querySelector("#roll");
-var hold=document.querySelector("#hold");
-var para=document.querySelector("#score");
-var turn=document.querySelector("#turn")
-var div=document.querySelector(".scene");
-var cube = document.querySelector('.cube');
-var button=document.querySelector("#restart");
-var popup=document.querySelector(".popup");
-function openpopup(){
-    popup.classList.add("open-popup");
-    body.classList.toggle('active');
+body{
+  background-image: linear-gradient(100deg, #00229d, #d0017a);
+  color:#000000
 }
-function closepopup(){
-    popup.classList.remove("open-popup");
+h1{
+  text-align: center;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding:0.7%;
+  font-weight:900;
+  font-size: 600%;
+  color: rgba(240, 248, 255, 0.708);
+  /* background: -webkit-linear-gradient(0deg,#d0017a, #00229d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
 }
-var currentClass = '';
-let x;
-let sum=0;
-let tnode;
-let trn=0;
-let pl1=0;
-let pl2=0;
-button.style.display="none";
-turn.innerHTML="Player-1   :"
-dice.addEventListener("click",rollfun);
-function rollfun() {
-    rollDice();
-    if(x!=1){
-        sum+=x;
-        check();
-        tnode=document.createTextNode(" "+x);
-        para.appendChild(tnode);
-    }else if(x==1){
-        tnode=document.createTextNode("You rolled a 1 \n Resetting..........")
-        para.appendChild(tnode);
-        dice.disabled=true;
-        hold.disabled=true;
-        setTimeout(() => { 
-            reset();
-            }, 1000); 
-    }
+/* table, th, td, tr {
+    border: 1px solid;
+    width:50%;
+    table-layout: auto;
+    text-align: center;
+  } */
+  #table{
+    position:relative;
+    width:30%;
+    padding:5px;
+    margin:2px 20px;
+    color:#000000;
+    border-color: #000000;
+    display: inline;
 }
-
-function check(){
-    if(trn==0){
-        if(pl1+sum>=100){
-            div.innerHTML="Congratulations, Player-1 Won the game!!"
-            p1.innerHTML=pl1+sum;
-            restart()
-        }
-    }else{
-        if(pl2+sum>=100){
-            div.innerHTML="Congratulations, Player-2 Won the game!!"
-            p2.innerHTML=pl2+sum;
-            restart();
-        }
-    }
-    
+.special{
+  font-size: 200%;
 }
-hold.addEventListener("click",holdfun)
-function holdfun(){
-    if(trn==0){
-        pl1+=sum
-        p1.innerHTML=pl1;
-        reset();
-    }else{
-        pl2+=sum
-        p2.innerHTML=pl2;
-        reset();
-    }
+#turn,#score{
+  font-size:40px;
+  font-family: Montserrat;
+  font-weight: 500;
 }
-function reset(){
-    sum=0;
-    if(trn==0){
-        trn=1;
-        turn.innerHTML="Player-2:   ";
-        para.innerHTML="Score:";
-    }else{
-        turn.innerHTML="Player-1:   ";
-        para.innerHTML="Score:";
-        trn=0;
-    }
-     dice.disabled=false;
-    hold.disabled=false;
+#turn{
+  position: relative;
+  left:50px;
 }
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
+#score{
+  position:relative;
+  top:70px;
 }
-function rollDice() {
- var randNum =getRandomInt(1,7);
- x=randNum; 
-  console.log(randNum )
-  var showClass = 'show-' + randNum;
-  console.log(showClass)
-  if ( currentClass ) {
-    cube.classList.remove( currentClass );
+.cube {
+  width:200px;
+  height: 200px;
+  position: relative;
+  top: 10px;
+  left:600px;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transition: transform 1s;
+  margin-bottom: 1.5%;
   }
-  cube.classList.add( showClass );
-currentClass = showClass;
-}
-rollDice();
+.cube.show-1  { transform: translateZ(-100px) rotateY(   0deg); }
+.cube.show-2  { transform: translateZ(-100px) rotateY(-180deg); }
+.cube.show-3  { transform: translateZ(-100px) rotateY( -90deg); }
+.cube.show-4   { transform: translateZ(-100px) rotateY(  90deg); }
+.cube.show-5   { transform: translateZ(-100px) rotateX( -90deg); }
+.cube.show-6 { transform: translateZ(-100px) rotateX(  90deg); }
 
-function restart(){
-    button.style.display="block";
-    button.addEventListener("click",()=>{
-        location.reload();
-    })
+
+.cube__face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 4px solid white;
+  line-height: 200px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+
+.cube__face--1  { background: black;  opacity: 0.95;}
+.cube__face--3  { background: black;   opacity: 0.95; }
+.cube__face--2  {  background: black;   opacity: 0.95; }
+.cube__face--4  {  background: black;   opacity: 0.95; }
+.cube__face--5   {  background: black;   opacity: 0.95; }
+.cube__face--6 {  background: black;  opacity: 0.95; }
+
+.cube__face--1  { transform: rotateY(  0deg) translateZ(100px); }
+.cube__face--2   { transform: rotateY(180deg) translateZ(100px); }
+.cube__face--3  { transform: rotateY( 90deg) translateZ(100px); }
+.cube__face--4   { transform: rotateY(-90deg) translateZ(100px); }
+.cube__face--5   { transform: rotateX( 90deg) translateZ(100px); }
+.cube__face--6 { transform: rotateX(-90deg) translateZ(100px); }
+#restart{
+ margin:20%;
+}
+#short{
+  color:rgb(255, 230, 0);
+}
+.popup{
+    width: 400px;
+    background:#cac709;
+    border-radius: 40px;
+    position:absolute;
+    top:0;
+    left:50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color:#333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
 
 }
-document.onkeydown = function (e) {
-    if(dice.disabled==true){
-        e.preventDefault();
-    }else if(e.code=='Space'){
-        rollfun();
-    }else if(e.code=='Enter'){
-        holdfun();
-    }
-  };
+.open-popup{
+    visibility: visible;
+    top:50%;
+    transform: translate(-50%,-50%) scale(1);
+
+}
+
+#restart, .btn-info{
+  margin:auto;
+
+}
